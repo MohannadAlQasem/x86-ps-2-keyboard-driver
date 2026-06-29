@@ -5,7 +5,6 @@
 #define PIC1_DATA    (PIC1_COMMAND + 1)
 #define PIC2_COMMAND 0xA0
 #define PIC2_DATA    (PIC2_COMMAND + 1)
-
 #define PIC_EOI      0x20
 
 
@@ -30,8 +29,8 @@ void pic_remap(void) {
     outb(0x21, 0x01); io_wait();
     outb(0xA1, 0x01); io_wait();
 
-    outb(0x21,  0xFF);  // Unmask bit 1 (IRQ1), mask others including IRQ0 (bit 0)
-    outb(0xA1, 0xFF);  // Mask all slave IRQs
+    outb(0x21,  0xFF);  // Mask All Master IRQs.
+    outb(0xA1, 0xFF);  // Mask all slave IRQs.
 }
 void pic_send_eoi(unsigned char irq) {
     if (irq >= 8) {
